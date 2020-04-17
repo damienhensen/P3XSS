@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damien P3XSS</title>
+    <meta name="author" content="Damien Hensen">
+</head>
+
+<body>
+    <h1>
+        P3XSS
+    </h1>
+    <input type="text" value="&quot;Is dit regel 2&#63;&quot;" placeholder="regel 2&#63;"> <br>
+
+    &lt;script&gt; <br>
+        Escaped script dus het werkt niet&#33; <br>
+    &lt;&#x2F;script&gt; <br>
+
+    <input type="text" id="changelink">
+    <button id="change">change</button>
+    <a href="" id="link2regel1">
+        link
+    </a>
+
+    <script>
+        var element = document.getElementById('link2regel1');
+        var text = "default link";
+        var safe = escape(text);
+
+        element.href = safe;
+
+        
+
+        document.getElementById('changelink').addEventListener('keyup', ()=>{
+            var newLink = document.getElementById('changelink').value;
+            var newSafeLink = escape(newLink);
+            // var newSafeLink = newLink;
+            element.href = newSafeLink;
+        })
+    </script>
+</body>
+
+</html>
